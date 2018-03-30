@@ -12,7 +12,7 @@
 Remember to change the env file to your database details. 
 
 ``` bash
-git clone https://github.com/jgudhlanga/dev-app-admin.git
+git clone https://github.com/jgudhlanga/nueva-era.git
 chmod -R 777 /storage /bootstrap/cache
 cp .env.example .env
 composer install
