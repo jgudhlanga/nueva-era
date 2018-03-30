@@ -31,6 +31,8 @@ return [
 	'website' => 'Website',
 	'list' => 'List|Lists',
 	'profile' => 'Profile|Profiles',
+	'login' => 'Login',
+	'logout' => 'Logout',
 	'detail' => 'Detail|Details',
 	'social_media' => 'Social Media',
 	'gallery' => 'Gallery',

@@ -27,7 +27,7 @@
                         @auth
                             <img src="{{ asset("storage/users/$profilePicture") }}" class="user-image">
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                            <span class="hidden-xs">{{ auth()->user()->first_name }} {{auth()->user()->last_name}}</span>
+                            <span class="hidden-xs">{{$userNames}}</span>
                         @endauth
                     </a>
                     <ul class="dropdown-menu">
@@ -35,23 +35,28 @@
                         <li class="user-header">
                             @auth
                                 <img src="{{ asset("storage/users/$profilePicture") }}" class="img-circle">
-                                <p>{{ auth()->user()->first_name }} {{ auth()->user()->last_name}}</p>
+                                <p>{{ $userNames }}</p>
+                                <p>{{ $userRoles }}</p>
                             @endauth
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             @if (auth()->guest())
                                 <div class="pull-left">
-                                    <a href="{{ route('login') }}" class="btn btn-default btn-flat">Login</a>
+                                    <a href="{{ route('login') }}" class="btn btn-default btn-flat">
+                                        @lang('general.login')
+                                    </a>
                                 </div>
                             @else
                                 <div class="pull-left">
-                                    <a href="{{ url('profile') }}" class="btn btn-default btn-flat">Profile</a>
+                                    <a href="{{ route('users.show', auth()->user()->id) }}" class="btn btn-default btn-flat">
+                                        @choice('general.profile', 1)
+                                    </a>
                                 </div>
                                 <div class="pull-right">
                                     <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                                        Logout
+                                        @lang('general.logout')
                                     </a>
                                 </div>
                             @endif
