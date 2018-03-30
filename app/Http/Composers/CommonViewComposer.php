@@ -7,7 +7,6 @@ use App\Services\Modules\ModuleService;
 use App\Services\Users\UserService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Request;
-use Auth;
 
 class CommonViewComposer
 {
@@ -44,11 +43,21 @@ class CommonViewComposer
 			$currentModule = 'cpanel';
 		}
 		
-		$profilePicture = $this->userService->getUserProfilePicture(Auth::user());
+		$profilePicture = $this->userService->getUserProfilePicture(auth()->user());
+		$userNames = (isset(auth()->user()->first_name)) ? auth()->user()->first_name .' '.auth()->user()->last_name : trans('general.people.unknown_user');
+		$roles = (isset(auth()->user()->roles)) ? auth()->user()->roles : [];
+		$userRoles = '';
+		if(count($roles) > 0) {
+		    foreach ($roles as $role) {
+                $userRoles .= $role->display_name. ',';
+            }
+        }
 		$data = [
 			'systemModules' => $systemModules,
 			'currentModule' => $currentModule,
-			'profilePicture' => $profilePicture
+			'profilePicture' => $profilePicture,
+            'userNames' => $userNames,
+            'userRoles' => ($userRoles != '') ? rtrim($userRoles, ',') : trans('general.people.unknown_role')
 		];
 		$view->with($data);
 	}

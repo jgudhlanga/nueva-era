@@ -30,6 +30,7 @@ class CommonViewComposerProvider extends ServiceProvider
     public function composeCommonView()
     {
     	view()->composer([
+    		'errors.403',
     		'layouts._partials.header',
 		    'layouts._partials.sidebar',
 		    'layouts._partials.footer'], CommonViewComposer::class);

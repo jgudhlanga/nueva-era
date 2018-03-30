@@ -58,5 +58,7 @@ return [
 		'cell_number' => 'Cell',
 		'tel_number' => 'Telephone',
 		'upload' => 'Upload Profile Picture',
+        'unknown_user' => 'Unknown User',
+        'unknown_role' => 'Unknown Role',
 	],
 ];

@@ -1,5 +1,5 @@
 .forbidden403 {
-	padding-top: 20px; height: 100vh;
+	padding: 20px; height: 100vh;
 	background-color: lighten($red, 100%);
 	text-align: center;
 	overflow: auto;
@@ -8,11 +8,11 @@
 	}
 	.code, .header {
 		font-weight: bold;
-		font-size: 60px;
+		font-size: 40px;
 		font-family: Algerian;
 		color: darken($red, 10%);
 	}
 	.body {
-	
+		font-size: 20px; font-weight:bold;
 	}
 }
