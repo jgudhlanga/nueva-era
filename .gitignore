@@ -7,3 +7,6 @@ Homestead.json
 Homestead.yaml
 .env
 public/mix-manifest.json
+!/storage/app/public/images/bg.jpg
+!/storage/app/public/images/worn_forbidden.svg
+!/storage/app/public/users/unknown.png
