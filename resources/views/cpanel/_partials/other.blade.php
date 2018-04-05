@@ -31,7 +31,7 @@
         <a class="btn btn-default btn-sm btn-block text-bold"
            href="{{ route('cpanel.general.manager', ['Language']) }}">
             @choice('general.language', 2)
-            &nbsp;<span class="badge">0</span>
+            &nbsp;<span class="badge">{{ $languageCount }}</span>
         </a>
     </div>
 

@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
 	    $this->call(RolesTableSeeder::class);
 	    $this->call(UserRolesSeeder::class);
         $this->call(CountriesSeeder::class);
+        $this->call(LanguagesTableSeeder::class);
         //$this->call(LaratrustSeeder::class);
 	    /*factory(App\Models\Users\User::class, 1)->create();
 	    factory(App\Models\Users\User::class, 1)->create();

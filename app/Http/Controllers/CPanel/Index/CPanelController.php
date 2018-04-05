@@ -82,13 +82,14 @@ class CpanelController extends Controller
 	    $countryCount = $this->countryService->count(null);
 	    $memberTypeCount = $this->generalService->count($this->generalService->initializeModel('MemberType'));
 	    $addressTypeCount = $this->generalService->count($this->generalService->initializeModel('AddressType'));
+	    $languageCount = $this->generalService->count($this->generalService->initializeModel('Language'));
 	    $permissionCount = $this->permissionService->count(null);
 	    $roleCount = $this->roleService->count(null);
 	    $args = ['moduleCount' => $moduleCount,'statusCount' => $statusCount,'iconCount' => $iconCount,
             'titleCount' => $titleCount,'maritalStatusCount' => $maritalStatusCount, 'genderCount' => $genderCount,
             'occupationCount' => $occupationCount, 'raceCount' => $raceCount, 'countryCount' => $countryCount,
             'memberTypeCount' => $memberTypeCount, 'addressTypeCount' => $addressTypeCount, 'permissionCount' => $permissionCount,
-            'roleCount' => $roleCount];
+            'roleCount' => $roleCount, 'languageCount' => $languageCount];
         return view('cpanel.index.index')->with($args);
     }
    
