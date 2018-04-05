@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\CPanel\Modules;
 
 use App\Http\Requests\CPanel\Modules\ModuleRequest;
-use App\Services\General\IconService;
+use App\Services\General\GeneralService;
 use App\Services\General\StatusService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,25 +26,21 @@ class ModuleController extends Controller
 	protected $moduleService;
 	
 	/**
-	 * @var IconService
+	 * @var GeneralService
 	 */
-	protected $iconService;
+	protected $generalService;
 	
 	/**
 	 * @var StatusService
 	 */
 	protected $statusService;
 	
-	/**
-	 * ModuleController constructor.
-	 * @param ModuleService $modulesService
-	 * @param IconService $iconService
-	 * @param StatusService $statusService
-	 */
-	public function __construct(ModuleService $modulesService, IconService $iconService, StatusService $statusService)
+
+	public function __construct(ModuleService $modulesService, StatusService $statusService,
+                                GeneralService $generalService)
     {
         $this->moduleService = $modulesService;
-        $this->iconService = $iconService;
+        $this->generalService = $generalService;
         $this->statusService = $statusService;
     }
 	
@@ -53,7 +49,8 @@ class ModuleController extends Controller
 	 */
 	public function index()
     {
-    	$icons = $this->iconService->findAll();
+        $iconModel = $this->generalService->initializeModel('Icon');
+    	$icons = $this->generalService->findAll($iconModel, ['status_id' => $this->statusService->statusActive()]);
         return view('cpanel.modules.index', compact('icons'));
     }
 	
@@ -95,7 +92,8 @@ class ModuleController extends Controller
 	 */
 	public function show(Module $module)
     {
-	    $icons = $this->iconService->findAll();
+        $iconModel = $this->generalService->initializeModel('Icon');
+        $icons = $this->generalService->findAll($iconModel, ['status_id' => $this->statusService->statusActive()]);
         return view('cpanel.modules.edit', compact('module', 'icons'));
     }
 	

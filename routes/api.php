@@ -22,30 +22,6 @@ Route::group(['prefix' => 'cpanel'], function (){
 	
 	/* GENERAL */
 	Route::group(['prefix' => 'general'], function (){
-		Route::group(['prefix' => 'icons'], function () {
-			Route::put('/change-status/{icon}', 'CPanel\General\Icon\Api\IconController@changeStatus');
-		});
-		Route::group(['prefix' => 'titles'], function () {
-			Route::put('/change-status/{title}', 'CPanel\General\Title\Api\TitleController@changeStatus');
-		});
-		Route::group(['prefix' => 'marital-statuses'], function () {
-			Route::put('/change-status/{marital_status}', 'CPanel\General\MaritalStatus\Api\MaritalStatusController@changeStatus');
-		});
-		Route::group(['prefix' => 'gender'], function () {
-			Route::put('/change-status/{gender}', 'CPanel\General\Gender\Api\GenderController@changeStatus');
-		});
-		Route::group(['prefix' => 'occupations'], function () {
-			Route::put('/change-status/{occupation}', 'CPanel\General\Occupations\Api\OccupationsController@changeStatus');
-		});
-		Route::group(['prefix' => 'races'], function () {
-			Route::put('/change-status/{race}', 'CPanel\General\Races\Api\RaceController@changeStatus');
-		});
-		Route::group(['prefix' => 'member-types'], function () {
-			Route::put('/change-status/{member_type}', 'CPanel\General\MemberTypes\Api\MemberTypesController@changeStatus');
-		});
-		Route::group(['prefix' => 'address-types'], function () {
-			Route::put('/change-status/{address_type}', 'CPanel\General\AddressTypes\Api\AddressTypesController@changeStatus');
-		});
 		Route::group(['prefix' => 'countries'], function () {
 			Route::put('/change-status/{country}', 'CPanel\General\Countries\Api\CountriesController@changeStatus');
 			Route::get('/get-countries', 'CPanel\General\Countries\Api\CountriesController@getCountries');
