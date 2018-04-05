@@ -51,9 +51,9 @@ class RoleRepository implements RepositoryInterface
 			foreach ($columns as $column) {
 				$cols .= "r.{$column},";
 			}
-			$query->select(rtrim(',', $cols), 's.title as status');
+			$query->select(rtrim(',', $cols), 's.name as status');
 		} else {
-			$query->select('r.*', 's.title as status');
+			$query->select('r.*', 's.name as status');
 		}
 		
 		if(!empty($where) && is_array($where))

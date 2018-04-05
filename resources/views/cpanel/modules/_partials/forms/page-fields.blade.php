@@ -35,8 +35,8 @@
             <option value="">{{ trans('forms.choose') }}</option>
             @if(count($icons) > 0)
                 @foreach($icons as $icon)
-                    <option value="{{$icon->class}}" @isset($page->class) @if($page->class == $icon->class) selected="selected" @endif @endisset>
-                        {{$icon->class}}
+                    <option value="{{$icon->name}}" @isset($page->class) @if($page->class == $icon->name) selected="selected" @endif @endisset>
+                        {{$icon->name}}
                     </option>
                 @endforeach
             @endif

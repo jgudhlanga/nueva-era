@@ -4,7 +4,7 @@ namespace App\Http\Controllers\CPanel\Modules;
 
 use App\Http\Requests\CPanel\Modules\PageRequest;
 use App\Models\Modules\Page;
-use App\Services\General\IconService;
+use App\Services\General\GeneralService;
 use App\Services\General\StatusService;
 use App\Services\Modules\PageService;
 use Illuminate\Http\Request;
@@ -25,9 +25,9 @@ class PageController extends Controller
 	protected $pageService;
 	
 	/**
-	 * @var IconService
+	 * @var GeneralService
 	 */
-	protected $iconService;
+	protected $generalService;
 	
 	/**
 	 * @var StatusService
@@ -37,13 +37,13 @@ class PageController extends Controller
 	/**
 	 * PageController constructor.
 	 * @param PageService $pageService
-	 * @param IconService $iconService
+	 * @param GeneralService $generalService
 	 * @param StatusService $statusService
 	 */
-	public function __construct(PageService $pageService, IconService $iconService, StatusService $statusService)
+	public function __construct(PageService $pageService, GeneralService $generalService, StatusService $statusService)
 	{
 		$this->pageService = $pageService;
-		$this->iconService = $iconService;
+		$this->generalService = $generalService;
 		$this->statusService = $statusService;
 	}
 	

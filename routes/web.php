@@ -15,16 +15,12 @@ Route::prefix('cpanel')->group(function () {
 	
 	/*GENERAL*/
 	Route::prefix('general')->middleware('role:senior-developer|junior-developer|administrator')->group(function () {
-		Route::resource('status', 'CPanel\General\Status\StatusController')->middleware('auth');
-		Route::resource('icons', 'CPanel\General\Icon\IconController')->middleware('auth');
-		Route::resource('titles', 'CPanel\General\Title\TitleController')->middleware('auth');
-		Route::resource('gender', 'CPanel\General\Gender\GenderController')->middleware('auth');
-		Route::resource('marital-statuses', 'CPanel\General\MaritalStatus\MaritalStatusController')->middleware('auth');
-		Route::resource('occupations', 'CPanel\General\Occupations\OccupationsController')->middleware('auth');
-		Route::resource('races', 'CPanel\General\Races\RaceController')->middleware('auth');
-		Route::resource('countries', 'CPanel\General\Countries\CountriesController')->middleware('auth');
-		Route::resource('member-types', 'CPanel\General\MemberTypes\MemberTypesController')->middleware('auth');
-		Route::resource('address-types', 'CPanel\General\AddressTypes\AddressTypesController')->middleware('auth');
+		Route::get('manager/{model}', 'CPanel\General\GeneralController@manager')->name('cpanel.general.manager')->middleware('auth');
+		Route::post('manager/{model}', 'CPanel\General\GeneralController@store')->name('cpanel.general.store')->middleware('auth');
+		Route::get('manager/{model}/{id}', 'CPanel\General\GeneralController@edit')->name('cpanel.general.edit')->middleware('auth');
+		Route::put('manager/{model}/{id}', 'CPanel\General\GeneralController@update')->name('cpanel.general.update')->middleware('auth');
+		Route::put('manager/{model}/{id}/status', 'CPanel\General\GeneralController@changeStatus')->name('cpanel.general.change_status')->middleware('auth');
+		Route::delete('manager/{model}/{id}', 'CPanel\General\GeneralController@destroy')->name('cpanel.general.destroy')->middleware('auth');
 	});
 	
 	/*MODULES & PAGES */

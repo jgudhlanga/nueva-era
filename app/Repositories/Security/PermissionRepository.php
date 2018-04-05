@@ -51,9 +51,9 @@ class PermissionRepository implements RepositoryInterface
 			foreach ($columns as $column) {
 				$cols .= "p.{$column},";
 			}
-			$query->select(rtrim(',', $cols), 's.title as status');
+			$query->select(rtrim(',', $cols), 's.name as status');
 		} else {
-			$query->select('p.*', 's.title as status');
+			$query->select('p.*', 's.name as status');
 		}
 		
 		if(!empty($where) && is_array($where))

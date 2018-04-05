@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Users;
 
 use App\Http\Requests\Users\UserRequest;
 use App\Models\Users\User;
-use App\Services\General\GenderService;
+use App\Services\General\GeneralService;
 use App\Services\General\StatusService;
-use App\Services\General\TitleService;
 use App\Services\Security\RoleService;
 use App\Services\Users\UserService;
 use Illuminate\Http\Request;
@@ -26,39 +25,36 @@ class UsersController extends Controller
 	 * @var UserService
 	 */
 	protected $userService;
-	/**
-	 * @var GenderService
-	 */
-	protected $genderService;
-	/**
-	 * @var TitleService
-	 */
-	protected $titleService;
+
 	/**
 	 * @var RoleService
 	 */
 	protected $roleService;
-	/**
-	 * @var StatusService
-	 */
+
+    /**
+     * @var StatusService
+     */
 	protected $statusService;
-	
-	/**
-	 * UsersController constructor.
-	 * @param UserService $userService
-	 * @param GenderService $genderService
-	 * @param TitleService $titleService
-	 * @param RoleService $roleService
-	 * @param StatusService $statusService
-	 */
-	public function __construct(UserService $userService, GenderService $genderService, TitleService $titleService,
-	    RoleService $roleService, StatusService $statusService)
+
+    /**
+     * @var GeneralService
+     */
+	protected $generalService;
+
+    /**
+     * UsersController constructor.
+     * @param UserService $userService
+     * @param RoleService $roleService
+     * @param StatusService $statusService
+     * @param GeneralService $generalService
+     */
+	public function __construct(UserService $userService, RoleService $roleService,
+                                StatusService $statusService, GeneralService $generalService)
     {
     	$this->userService = $userService;
-    	$this->genderService = $genderService;
-    	$this->titleService = $titleService;
     	$this->roleService = $roleService;
     	$this->statusService = $statusService;
+    	$this->generalService = $generalService;
     }
 	
 	/**
@@ -74,8 +70,10 @@ class UsersController extends Controller
 	 */
 	public function create()
     {
-    	$titles = $this->titleService->findAll(['status_id' => $this->statusService->statusActive()]);
-    	$genders = $this->genderService->findAll(['status_id' => $this->statusService->statusActive()]);
+        $titleModel = $this->generalService->initializeModel('Title');
+        $genderModel = $this->generalService->initializeModel('Gender');
+    	$titles = $this->generalService->findAll($titleModel, ['status_id' => $this->statusService->statusActive()]);
+        $genders = $this->generalService->findAll($genderModel, ['status_id' => $this->statusService->statusActive()]);
     	$roles = $this->roleService->findAll(['status_id' => $this->statusService->statusActive()]);
         return view('users.create', compact('titles', 'genders', 'roles'));
     }
@@ -126,8 +124,10 @@ class UsersController extends Controller
 	{
 		/* Profile picture */
 		$user->profile_picture = $this->userService->getUserProfilePicture($user);
-		$titles = $this->titleService->findAll(['status_id' => $this->statusService->statusActive()]);
-		$genders = $this->genderService->findAll(['status_id' => $this->statusService->statusActive()]);
+        $titleModel = $this->generalService->initializeModel('Title');
+        $genderModel = $this->generalService->initializeModel('Gender');
+        $titles = $this->generalService->findAll($titleModel, ['status_id' => $this->statusService->statusActive()]);
+        $genders = $this->generalService->findAll($genderModel, ['status_id' => $this->statusService->statusActive()]);
 		$roles = $this->roleService->findAll(['status_id' => $this->statusService->statusActive()]);
 		$userRoles = (count($user->roles) > 0) ? $user->roles()->pluck('id')->all() : [];
 		

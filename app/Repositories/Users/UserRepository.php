@@ -7,7 +7,6 @@ use App\Models\Users\User;
 use Illuminate\Support\Facades\DB;
 use Auth;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class UserRepository
@@ -59,9 +58,9 @@ class UserRepository implements RepositoryInterface
 			foreach ($columns as $column) {
 				$cols .= "u.{$column},";
 			}
-			$query->select(rtrim(',', $cols), 's.title as status', 'g.name as gender', 't.name as title');
+			$query->select(rtrim(',', $cols), 's.name as status', 'g.name as gender', 't.name as title');
 		} else {
-			$query->select('u.*', 's.title as status', 'g.name as gender', 't.name as title');
+			$query->select('u.*', 's.name as status', 'g.name as gender', 't.name as title');
 		}
 		
 		if(!empty($where) && is_array($where))

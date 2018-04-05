@@ -53,9 +53,9 @@ class ModuleRepository implements RepositoryInterface
 		    foreach ($columns as $column) {
 			    $cols .= "m.{$column},";
 		    }
-		    $query->select(rtrim(',', $cols), 's.title as status');
+		    $query->select(rtrim(',', $cols), 's.name as status');
 	    } else {
-		    $query->select('m.*', 's.title as status');
+		    $query->select('m.*', 's.name as status');
 	    }
 	    
 	    if(!empty($where) && is_array($where))

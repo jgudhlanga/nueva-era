@@ -26,7 +26,7 @@ return [
 	'id' => 'ID',
 	'email' => 'Email',
 	'fax' => 'Fax',
-	'language' => 'Language',
+	'language' => 'Language|Languages',
 	'check_all' => 'Check All',
 	'website' => 'Website',
 	'list' => 'List|Lists',
@@ -63,4 +63,13 @@ return [
         'unknown_user' => 'Unknown User',
         'unknown_role' => 'Unknown Role',
 	],
+    'alerts' => [
+        'created' => 'Item Successfully Created',
+        'updated' => 'Item Successfully Updated',
+        'error' => 'Item not Created',
+        'deleted' => 'Item has been deleted',
+        'reactivated' => 'Item has been reactivated',
+        'deactivated' => 'Item has been deactivated',
+        'not_found' => 'Item not found',
+    ]
 ];

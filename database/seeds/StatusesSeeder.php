@@ -13,8 +13,8 @@ class StatusesSeeder extends Seeder
 	    // Reset Auto Increment
 	    DB::statement('ALTER TABLE statuses AUTO_INCREMENT = 0');
 	    $data = [
-		    1 => ['id' => 1, 'title' => 'Active', 'description' => 'Model Is Active', 'created_by' => 1],
-		    2 => ['id' => 2, 'title' => 'Inactive', 'description' => 'Model Is Active', 'created_by' => 1],
+		    1 => ['id' => 1, 'name' => 'Active', 'description' => 'Model Is Active', 'created_by' => 1],
+		    2 => ['id' => 2, 'name' => 'Inactive', 'description' => 'Model Is Active', 'created_by' => 1],
 	    ];
 	
 	    foreach ($data as $row)

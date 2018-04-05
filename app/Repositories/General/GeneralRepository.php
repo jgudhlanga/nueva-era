@@ -2,70 +2,39 @@
 
 namespace App\Repositories\General;
 
-
-use App\Contracts\RepositoryInterface;
-
 /**
  * Class GeneralRepository
  * @package App\Repositories\General
  */
-class GeneralRepository implements RepositoryInterface
+class GeneralRepository
 {
-	/**
-	 * @var string
-	 */
-	protected $model;
+
+	public function __construct()
+	{
+
+	}
 	
 	/**
-	 * @var string
-	 */
-	protected $modelName;
-	
-	/**
-	 * @var string
-	 */
-	protected $tableName;
-	
-	/**
-	 * GeneralRepository constructor.
 	 * @param $model
-	 * @param $tableName
-	 */
-	public function __construct($model, $tableName)
-	{
-		$this->modelName = $model;
-		$this->model = config('system.general_model_namespace').$model;
-		$this->tableName = $tableName;
-	}
-	
-	/**
-	 * @param $id
 	 * @return mixed
 	 */
-	public function find($id)
+	public function find($model, $id)
 	{
-		return $this->model->where('id', $id)->first();
+		return $model->where('id', $id)->first();
 	}
 	
-	/**
-	 * @param array $columns
-	 * @param array $where
-	 * @param null $paginate
-	 * @param null $limit
-	 * @param null $orderBy
-	 * @return mixed
-	 */
-	public function findBy($columns = [], $where = [], $paginate = null, $limit = null, $orderBy = null)
+
+	public function findBy($table, $columns = [], $where = [], $paginate = null, $limit = null, $orderBy = null)
 	{
-		$query = DB::table("{$this->tableName} AS tn")->leftJoin('statuses AS s', 's.id', '=', 'tn.status_id');
+		$query = DB::table("{$table} AS t")->leftJoin('statuses AS s', 's.id', '=', 't.status_id');
 		if (!empty($columns)) {
 			$cols = "";
 			foreach ($columns as $column) {
-				$cols .= "tn.{$column},";
+				$cols .= "t.{$column},";
 			}
-			$query->select(rtrim(',', $cols), 's.title as status');
+			$query->select(rtrim(',', $cols), 's.name as status');
 		} else {
-			$query->select('tn.*', 's.title as status');
+			$query->select('t.*', 's.name as status');
 		}
 		
 		if (!empty($where) && is_array($where)) {
@@ -83,7 +52,7 @@ class GeneralRepository implements RepositoryInterface
 				$query->orderBy(array_keys($orderBy)[0], array_values($orderBy)[0]);
 			}
 		} else {
-			$query->orderBy('tn.name', 'asc')->take($limit);
+			$query->orderBy('t.name', 'asc')->take($limit);
 		}
 		
 		if (!is_null($paginate)) {
@@ -92,16 +61,10 @@ class GeneralRepository implements RepositoryInterface
 		return $query->get();
 	}
 	
-	/**
-	 * @param array $where
-	 * @param null $paginate
-	 * @param null $limit
-	 * @param null $orderBy
-	 * @return mixed
-	 */
-	public function findAll($where = [], $paginate = null, $limit = null, $orderBy = null)
+
+	public function findAll($model, $where = [], $paginate = null, $limit = null, $orderBy = null)
 	{
-		$query = $this->model->where('id', '>', 0);
+		$query = $model->where('id', '>', 0);
 		if (!empty($where) && is_array($where)) {
 			for ($i = 0; $i < count($where); $i++) {
 				if (is_array(array_values($where)[$i])) {
@@ -127,30 +90,22 @@ class GeneralRepository implements RepositoryInterface
 		return $query->get();
 	}
 	
-	/**
-	 * @param $model
-	 * @return mixed
-	 */
-	public function delete($model)
+
+	public function delete($model, $id)
 	{
-		return $model->delete();
+	    $row = $this->find($model, $id);
+		return $row->delete();
 	}
 	
-	/**
-	 * @return mixed
-	 */
-	public function getTableColumns()
+
+	public function getTableColumns($model)
 	{
-		return $this->model->getTableColumns();
+		return $model->getTableColumns();
 	}
-	
-	/**
-	 * @param $params
-	 * @return mixed
-	 */
-	public function create($params)
+
+	public function create($model, $params)
 	{
-		$columns = $this->getTableColumns();
+		$columns = $this->getTableColumns($model);
 		$data = [];
 		foreach ($columns as $column) {
 			if ($column == 'id' || $column == 'created_at' || $column == 'updated_at' || $column == 'status_id') {
@@ -158,28 +113,21 @@ class GeneralRepository implements RepositoryInterface
 			}
 			$data[$column] = (isset($params[$column]) && $params[$column] != '') ? $params[$column] : null;
 		}
-		$created = $this->modelName::create($data);
+		$created = $model::create($data);
 		return $created;
 	}
 	
-	/**
-	 * @param $model
-	 * @param $data
-	 * @return mixed
-	 */
-	public function update($model, $data)
+
+	public function update($model, $id, $data)
 	{
-		$model->update($data);
-		return $model;
+        $row = $this->find($model, $id);
+        $row->update($data);
+		return $row;
 	}
-	
-	/**
-	 * @param array $where
-	 * @return mixed
-	 */
-	public function count($where = [])
+
+	public function count($model, $where = [])
 	{
-		$count = $this->model->where('id', '>', 0);
+		$count = $model->where('id', '>', 0);
 		if (!empty($where) && is_array($where)) {
 			for ($i = 0; $i < count($where); $i++) {
 				if (is_array(array_values($where)[$i])) {
