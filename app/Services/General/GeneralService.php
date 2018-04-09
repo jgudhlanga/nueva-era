@@ -47,7 +47,6 @@ class GeneralService
 
     public function delete($model, $id)
     {
-        Log::info('The id is '.$id);
         return $this->generalRepository->delete($model, $id);
     }
 
@@ -61,4 +60,17 @@ class GeneralService
         $model = config('system.general_model_namespace').$model;
         return new $model();
     }
+
+    public static function initializeModelStatic($model)
+    {
+        $model = config('system.general_model_namespace').$model;
+        return new $model();
+    }
+
+    public static function findAllStatic($model, $where=[], $paginate=null, $limit=null, $orderBy=null )
+    {
+        $generalRepo = new GeneralRepository();
+        return $generalRepo->findAll($model, $where, $paginate, $limit, $orderBy);
+    }
+
 }

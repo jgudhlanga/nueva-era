@@ -46,12 +46,12 @@ class GeneralController extends Controller
             if($data instanceof $modelNameSpace) {
                 $created = $data;
                 $status = Response::HTTP_CREATED;
-                $message = trans('general.alerts.created');
+                $message = trans('general.alerts.created', ['item' => $model]);
             }
             else{
                 $created = null;
                 $status = Response::HTTP_INTERNAL_SERVER_ERROR;
-                $message = trans('general.alerts.error');
+                $message = trans('general.alerts.error', ['item' => $model]);
             }
             DB::commit();
             return response()->json(['data' => $created, 'message' => $message], $status);
@@ -88,12 +88,12 @@ class GeneralController extends Controller
             if($item instanceof $modelNameSpace) {
                 $updated = $item;
                 $status = Response::HTTP_CREATED;
-                $message = trans('general.alerts.updated');
+                $message = trans('general.alerts.updated', ['item' => $model]);
             }
             else{
                 $updated = null;
                 $status = Response::HTTP_INTERNAL_SERVER_ERROR;
-                $message = trans('general.alerts.error');
+                $message = trans('general.alerts.error', ['item' => $model]);
             }
             DB::commit();
             return response()->json(['data' => $updated, 'message' => $message], $status);
@@ -127,7 +127,7 @@ class GeneralController extends Controller
             DB::commit();
             $message = ($itemUpdate->status_id == $this->getStatusActive()) ? 'general.alerts.reactivated' : 'general.alerts.deactivated';
             $title = ($itemUpdate->status_id == $this->getStatusActive()) ? 'alerts.reactivated' : 'alerts.deactivated';
-            return response()->json(['data' => $itemUpdate, 'message' => trans($message), 'title' => trans($title)], Response::HTTP_OK);
+            return response()->json(['data' => $itemUpdate, 'message' => trans($message, ['item' => $model]), 'title' => trans($title)], Response::HTTP_OK);
         }
         catch (\Exception $e)
         {

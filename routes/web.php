@@ -47,10 +47,11 @@ Route::resource('chms', 'Chms\Index\ChmsController')->middleware('auth');
 /*Hms Routes*/
 Route::resource('hms', 'Hms\Index\HmsController')->middleware('auth');
 
+/*Members Routes*/
+Route::resource('members', 'Members\MembersController')->middleware('auth');
 
 /*Procurement Routes*/
 Route::resource('procurement', 'Procurement\Index\ProcurementController')->middleware('auth');
-
 
 /*USERS ROUTES*/
 Route::resource('users', 'Users\UsersController')->middleware('auth');

@@ -22,11 +22,11 @@ class PagesSeeder extends Seeder
 		    ],
 		    2 => [
 			    'id' => 2,'title' => 'Dashboard', 'module_id' => 2, 'class' => 'fa fa-angle-right',
-			    'page_url' => 'members','status_id' => Status::ACTIVE, 'position' => 2, 'created_by' => 1
+			    'page_url' => 'members/dashboard','status_id' => Status::ACTIVE, 'position' => 2, 'created_by' => 1
 		    ],
 		    3 => [
 			    'id' => 3,'title' => 'List Members', 'module_id' => 2, 'class' => 'fa fa-angle-right',
-			    'page_url' => 'members/list','status_id' => Status::ACTIVE, 'position' => 3, 'created_by' => 1
+			    'page_url' => 'members','status_id' => Status::ACTIVE, 'position' => 3, 'created_by' => 1
 		    ],
 		    4 => [
 			    'id' => 4,'title' => 'Setup', 'module_id' => 2, 'class' => 'fa fa-angle-right',

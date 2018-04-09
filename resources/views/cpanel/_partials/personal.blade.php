@@ -2,21 +2,21 @@
     <div class="col-sm-2">
         <a class="btn btn-default btn-sm btn-block text-bold"
            href="{{ route('cpanel.general.manager', ['Gender']) }}">
-            @lang('gender.gender')
+            @choice('general.gender.heading', 1)
             &nbsp;<span class="badge">{{$genderCount}}</span>
         </a>
     </div>
     <div class="col-sm-2">
         <a class="btn btn-default btn-sm btn-block text-bold"
            href="{{ route('cpanel.general.manager', ['MemberType']) }}">
-            @choice('members.types.title', 2)
+            @choice('general.member_types.heading', 2)
             &nbsp;<span class="badge">{{$memberTypeCount}}</span>
         </a>
     </div>
     <div class="col-sm-2">
         <a class="btn btn-default btn-sm btn-block text-bold"
            href="{{ route('cpanel.general.manager', ['MaritalStatus']) }}">
-            @choice('marital-status.title', 2)
+            @choice('general.marital_statuses.heading', 2)
             &nbsp;<span class="badge">{{$maritalStatusCount}}</span>
         </a>
     </div>
@@ -37,7 +37,7 @@
     <div class="col-sm-2">
         <a class="btn btn-default btn-sm btn-block text-bold"
            href="{{ route('cpanel.general.manager', ['Title']) }}">
-            @choice('titles.title', 2)
+            @choice('general.titles.heading', 2)
             &nbsp;<span class="badge">{{$titleCount}}</span>
         </a>
     </div>

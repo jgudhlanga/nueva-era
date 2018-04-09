@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Requests\Users\UserRequest;
+use App\Http\Traits\People\PeopleTrait;
 use App\Models\Users\User;
-use App\Services\General\GeneralService;
 use App\Services\General\StatusService;
 use App\Services\Security\RoleService;
 use App\Services\Users\UserService;
@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\File;
  */
 class UsersController extends Controller
 {
+    use PeopleTrait;
 	/**
 	 * @var UserService
 	 */
@@ -37,24 +38,17 @@ class UsersController extends Controller
 	protected $statusService;
 
     /**
-     * @var GeneralService
-     */
-	protected $generalService;
-
-    /**
      * UsersController constructor.
      * @param UserService $userService
      * @param RoleService $roleService
      * @param StatusService $statusService
-     * @param GeneralService $generalService
      */
 	public function __construct(UserService $userService, RoleService $roleService,
-                                StatusService $statusService, GeneralService $generalService)
+                                StatusService $statusService)
     {
     	$this->userService = $userService;
     	$this->roleService = $roleService;
     	$this->statusService = $statusService;
-    	$this->generalService = $generalService;
     }
 	
 	/**
@@ -70,12 +64,11 @@ class UsersController extends Controller
 	 */
 	public function create()
     {
-        $titleModel = $this->generalService->initializeModel('Title');
-        $genderModel = $this->generalService->initializeModel('Gender');
-    	$titles = $this->generalService->findAll($titleModel, ['status_id' => $this->statusService->statusActive()]);
-        $genders = $this->generalService->findAll($genderModel, ['status_id' => $this->statusService->statusActive()]);
     	$roles = $this->roleService->findAll(['status_id' => $this->statusService->statusActive()]);
-        return view('users.create', compact('titles', 'genders', 'roles'));
+        $args = [
+            'titles' => $this->titleOptions(), 'genders' => $this->genderOptions(), 'roles' => $roles
+        ];
+    	return view('users.create')->with($args);
     }
     
 	
@@ -124,14 +117,14 @@ class UsersController extends Controller
 	{
 		/* Profile picture */
 		$user->profile_picture = $this->userService->getUserProfilePicture($user);
-        $titleModel = $this->generalService->initializeModel('Title');
-        $genderModel = $this->generalService->initializeModel('Gender');
-        $titles = $this->generalService->findAll($titleModel, ['status_id' => $this->statusService->statusActive()]);
-        $genders = $this->generalService->findAll($genderModel, ['status_id' => $this->statusService->statusActive()]);
 		$roles = $this->roleService->findAll(['status_id' => $this->statusService->statusActive()]);
 		$userRoles = (count($user->roles) > 0) ? $user->roles()->pluck('id')->all() : [];
-		
-		return view('users.edit', compact('user', 'titles', 'genders', 'roles', 'userRoles'));
+        $args = [
+            'titles' => $this->titleOptions(), 'genders' => $this->genderOptions(),
+            'roles' => $roles, 'userRoles' => $userRoles, 'user' => $user
+        ];
+
+        return view('users.edit')->with($args);
 	}
 	
 	/**

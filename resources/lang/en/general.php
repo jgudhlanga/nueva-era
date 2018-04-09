@@ -5,6 +5,7 @@ return [
 	'rights_reserved' => 'All Rights Reserved',
 	'home' => 'Home',
 	'action' => 'Action',
+	'type' => 'Type|Types',
 	'search' => 'Search',
 	'welcome' => 'Welcome',
 	'no_records_found' => 'No records found',
@@ -25,7 +26,9 @@ return [
 	'select' => 'Select',
 	'id' => 'ID',
 	'email' => 'Email',
+    'alt' => 'Alt',
 	'fax' => 'Fax',
+	'telephone' => 'Telephone',
 	'language' => 'Language|Languages',
 	'check_all' => 'Check All',
 	'website' => 'Website',
@@ -36,6 +39,8 @@ return [
 	'detail' => 'Detail|Details',
 	'social_media' => 'Social Media',
 	'gallery' => 'Gallery',
+    'interest' => 'Interest|Interests',
+    'contact_details' => 'Contact Details',
 	'placeholders' => [
 		'name' => 'enter your marital-status name here',
 		'description' => 'enter your marital-status description here',
@@ -47,6 +52,24 @@ return [
 	'races' => [
 		'heading' => 'Race|Races',
 	],
+	'gender' => [
+		'heading' => 'Gender|Genders',
+	],
+	'member_types' => [
+		'heading' => 'Member Type|Member Types',
+	],
+	'marital_statuses' => [
+		'heading' => 'Marital Status|Marital Statuses',
+	],
+	'titles' => [
+		'heading' => 'Title|Titles',
+	],
+	'address_types' => [
+		'heading' => 'Address Type|Address Types',
+	],
+	'application_types' => [
+		'heading' => 'Application Type|Application Types',
+	],
 	'people' => [
 		'first_name' => 'First Name',
 		'middle_name' => 'Middle Name',
@@ -54,6 +77,8 @@ return [
 		'title' => 'Title',
 		'gender' => 'Gender',
 		'user_name' => 'User Name',
+		'birth_date' => 'Birth Date',
+		'birth_place' => 'Birth Place',
 		'display_name' => 'Display Name',
 		'password' => 'Password',
 		'c_password' => 'C Password',
@@ -64,12 +89,12 @@ return [
         'unknown_role' => 'Unknown Role',
 	],
     'alerts' => [
-        'created' => 'Item Successfully Created',
-        'updated' => 'Item Successfully Updated',
-        'error' => 'Item not Created',
-        'deleted' => 'Item has been deleted',
-        'reactivated' => 'Item has been reactivated',
-        'deactivated' => 'Item has been deactivated',
-        'not_found' => 'Item not found',
+        'created' => ':item Successfully Created',
+        'updated' => ':item Successfully Updated',
+        'error' => ':item not Created',
+        'deleted' => ':item has been deleted',
+        'reactivated' => ':item has been reactivated',
+        'deactivated' => ':item has been deactivated',
+        'not_found' => ':item not found',
     ]
 ];

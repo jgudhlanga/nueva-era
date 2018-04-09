@@ -3,7 +3,6 @@
 namespace App\Services\Modules;
 
 use App\Repositories\Modules\ModuleRepository;
-use App\Models\Modules\Module;
 
 /**
  * Class ModuleService
