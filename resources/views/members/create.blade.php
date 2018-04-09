@@ -17,6 +17,8 @@
             <form id="addMemberForm" role="form" data-toggle="validator" method="POST" action="{{route('members.store')}}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                 @include('members._partials.forms.member-fields')
+                @include('members._partials.forms.contact_details')
+                @include('members._partials.forms.interests')
                 <div class="col-md-12  text-center">
                     <div class="padding-top-5">
                         <a class="btn btn-default" type="button" href="{{route('members.index')}}">
